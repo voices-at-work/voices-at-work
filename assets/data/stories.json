@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "The Silent Burnout",
+    "author": "Anonymous",
+    "category": "Mental Health",
+    "date": "2026-05-01",
+    "content": "I realized that staying late wasn't making me a better developer; it was just making me a tired one. Setting boundaries saved my career.",
+    "tags": ["burnout", "boundaries", "productivity"]
+  },
+  {
+    "id": 2,
+    "title": "Architecting for Growth",
+    "author": "System_Dev",
+    "category": "Career",
+    "date": "2026-05-03",
+    "content": "Moving from junior to senior isn't about code complexity; it's about how well you communicate your architecture to the team.",
+    "tags": ["growth", "mentorship", "engineering"]
+  },
+  {
+    "id": 3,
+    "title": "The Power of One Voice",
+    "author": "Derrick",
+    "category": "Culture",
+    "date": "2026-05-04",
+    "content": "In our latest 'Chama' meeting, we realized that transparency in penalties improved attendance by 40%. Consistency matters.",
+    "tags": ["transparency", "leadership", "impact"]
+  }
+]
