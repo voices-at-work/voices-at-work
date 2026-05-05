@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story | Voices At Work</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        :root {
+            --inspiration-gold: #f59e0b;
+            --inspiration-dark: #1e1b4b;
+        }
+        .text-inspiration { color: var(--inspiration-gold); }
+        .bg-inspiration { background-color: var(--inspiration-gold); }
+        
+        /* Typography for Article Content */
+        .article-body p { margin-bottom: 1.5rem; line-height: 1.8; color: #334155; font-size: 1.125rem; }
+        .article-body h2 { font-size: 1.875rem; font-weight: 800; color: #1e1b4b; margin-top: 2rem; margin-bottom: 1rem; }
+    </style>
+</head>
+<body class="bg-[#fafaf9] text-slate-900 font-sans">
+
+    <!-- Simple Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md border-b border-orange-100 h-20 flex items-center">
+        <div class="max-w-4xl mx-auto px-6 w-full flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-inspiration rounded-lg flex items-center justify-center">
+                    <span class="text-white font-black text-xs">V</span>
+                </div>
+                <span class="font-black text-xl tracking-tighter uppercase text-indigo-950">Voices</span>
+            </a>
+            <a href="index.html" class="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-inspiration transition">← Back to Feed</a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <article class="max-w-4xl mx-auto px-6 py-16">
+        <header id="post-header" class="mb-12">
+            <div id="post-meta" class="flex items-center space-x-4 mb-6 text-[10px] font-bold uppercase tracking-widest text-amber-500">
+                <!-- Injected via JS -->
+            </div>
+            <h1 id="post-title" class="text-4xl md:text-6xl font-black text-indigo-950 leading-tight tracking-tight mb-8">
+                <!-- Injected via JS -->
+            </h1>
+            
+            <div id="post-featured-image" class="w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl mb-12">
+                <!-- Injected via JS -->
+            </div>
+        </header>
+
+        <!-- Article Body -->
+        <div id="post-content" class="article-body">
+            <!-- Loading State -->
+            <div class="py-20 text-center">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-inspiration"></div>
+            </div>
+        </div>
+
+        <!-- Footer / Call to Action -->
+        <footer class="mt-20 pt-10 border-t border-slate-200">
+            <div class="bg-indigo-950 p-10 rounded-3xl text-center text-white">
+                <h3 class="text-2xl font-bold mb-4">Enjoyed this perspective?</h3>
+                <p class="text-slate-400 mb-8 max-w-md mx-auto">Voices At Work is fueled by professional insights. Join the conversation or support our research.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="support.html" class="px-8 py-4 bg-inspiration text-white rounded-xl font-bold uppercase text-xs tracking-widest hover:scale-105 transition">Support Our Work</a>
+                    <a href="index.html" class="px-8 py-4 bg-white/10 text-white rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-white/20 transition">Back to Feed</a>
+                </div>
+            </div>
+        </footer>
+    </article>
+
+    <script>
+        async function displayPost() {
+            // 1. Get the slug from the URL
+            const params = new URLSearchParams(window.location.search);
+            const slug = params.get('slug');
+
+            if (!slug) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            try {
+                // 2. Fetch the data
+                const response = await fetch('assets/data/stories.json?v=' + Date.now());
+                const stories = await response.json();
+
+                // 3. Find the specific story
+                const story = stories.find(s => s.slug === slug);
+
+                if (story) {
+                    // Update Title & Meta
+                    document.title = `${story.title} | Voices At Work`;
+                    document.getElementById('post-title').innerText = story.title;
+                    document.getElementById('post-meta').innerHTML = `
+                        <span>${story.category}</span>
+                        <span class="text-slate-200">|</span>
+                        <span class="text-slate-400">${story.date}</span>
+                    `;
+
+                    // Update Image
+                    document.getElementById('post-featured-image').innerHTML = `
+                        <img src="${story.featured_image}" class="w-full h-full object-cover" alt="${story.title}">
+                    `;
+
+                    // Update Content (Supports HTML from your JSON)
+                    document.getElementById('post-content').innerHTML = story.content;
+                } else {
+                    document.getElementById('post-content').innerHTML = `<p class="text-center font-bold text-red-500">Story not found.</p>`;
+                }
+
+            } catch (error) {
+                console.error("Post loading error:", error);
+                document.getElementById('post-content').innerHTML = `<p class="text-center">Error loading post. Please check your connection.</p>`;
+            }
+        }
+
+        window.onload = displayPost;
+    </script>
+</body>
+</html>
