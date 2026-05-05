@@ -28,7 +28,7 @@
         .animate-ticker {
             display: inline-block;
             white-space: nowrap;
-            animation: ticker 30s linear infinite;
+            animation: ticker(30s) linear infinite;
         }
         .ticker-container:hover .animate-ticker {
             animation-play-state: paused;
@@ -114,17 +114,14 @@
             </div>
         </main>
 
-        <!-- COLUMN 3: RIGHT (Featured / Ads) -->
+        <!-- COLUMN 3: RIGHT (Featured - NO ADS HERE) -->
         <aside class="lg:col-span-3 space-y-8">
             <div class="bg-indigo-950 p-8 rounded-3xl text-white shadow-2xl shadow-indigo-200">
                 <h3 class="text-amber-400 text-[10px] font-black uppercase tracking-widest mb-2">Featured Insight</h3>
                 <p class="text-lg font-bold leading-snug" id="featured-quote">"The best way to predict the future is to create it within your team."</p>
             </div>
-
-            <!-- Google Ad Slot 3: Large Square -->
-            <div class="w-full h-[400px] bg-slate-100 border border-dashed border-slate-300 flex items-center justify-center text-[10px] text-slate-400 uppercase tracking-widest rounded-3xl">
-                Google Ad Placeholder - Display
-            </div>
+            
+            <!-- Contextual Note: Third Ad space removed per request -->
         </aside>
     </div>
 
@@ -143,9 +140,7 @@
         <div class="bg-inspiration h-full flex items-center px-6 z-10">
             <span class="text-[10px] font-black uppercase tracking-tighter italic">Breaking Insights</span>
         </div>
-        <div class="animate-ticker flex space-x-12" id="ticker-content">
-            <!-- Ticker items will be injected here -->
-        </div>
+        <div class="animate-ticker flex space-x-12" id="ticker-content"></div>
     </div>
 
     <!-- CORE FEED LOGIC -->
@@ -156,7 +151,6 @@
             const ticker = document.getElementById('ticker-content');
 
             try {
-                // IMPORTANT: Fetch from local path relative to index.html
                 const response = await fetch('assets/data/stories.json?v=' + Date.now());
                 if (!response.ok) throw new Error('Failed to load feed');
                 
@@ -167,18 +161,16 @@
                     return;
                 }
 
-                // Clear loaders
                 container.innerHTML = '';
                 sidebar.innerHTML = '';
                 ticker.innerHTML = '';
 
-                // Sort: Newest first
                 const sortedStories = [...stories].reverse();
 
                 sortedStories.forEach((story, index) => {
-                    // 1. Inject into Main Feed (Center)
+                    // 1. Main Feed Card with "Read More"
                     const card = `
-                        <article class="story-card group cursor-pointer overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-50 transition-all duration-500">
+                        <article class="story-card group overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-50 transition-all duration-500">
                             <div class="relative h-[400px] overflow-hidden">
                                 <img src="${story.featured_image}" alt="${story.title}" class="w-full h-full object-cover">
                                 <div class="absolute top-6 left-6">
@@ -193,26 +185,36 @@
                                     <span class="w-1 h-1 bg-slate-200 rounded-full"></span>
                                     <span>${story.reading_time || '3 min read'}</span>
                                 </div>
-                                <h3 class="text-3xl font-black text-indigo-950 mb-4 group-hover:text-inspiration transition-colors">
-                                    ${story.title}
+                                <h3 class="text-3xl font-black text-indigo-950 mb-4 group-hover:text-inspiration transition-colors cursor-pointer">
+                                    <a href="post.html?slug=${story.slug}">${story.title}</a>
                                 </h3>
-                                <p class="text-slate-500 leading-relaxed line-clamp-3 mb-6">
+                                <p class="text-slate-500 leading-relaxed mb-6">
                                     ${story.content.replace(/<[^>]*>?/gm, '').substring(0, 180)}...
                                 </p>
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-[10px] font-bold text-indigo-400">
-                                        ${story.author ? story.author.charAt(0) : 'V'}
+                                
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-[10px] font-bold text-indigo-400">
+                                            ${story.author ? story.author.charAt(0) : 'V'}
+                                        </div>
+                                        <span class="text-[11px] font-black uppercase tracking-widest text-indigo-950">${story.author || 'Voices Staff'}</span>
                                     </div>
-                                    <span class="text-[11px] font-black uppercase tracking-widest text-indigo-950">${story.author || 'Voices Staff'}</span>
+                                    
+                                    <a href="post.html?slug=${story.slug}" class="text-[10px] font-black uppercase tracking-[0.2em] text-inspiration hover:text-indigo-950 transition-colors flex items-center group/link">
+                                        Read More 
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-2 transform group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </a>
                                 </div>
                             </div>
                         </article>
                     `;
                     container.innerHTML += card;
 
-                    // 2. Inject into Sidebar (Left)
-                    if (index < 5) { // Limit to 5
-                        const sidebarItem = `
+                    // 2. Sidebar
+                    if (index < 5) {
+                        sidebar.innerHTML += `
                             <div class="group cursor-pointer">
                                 <span class="text-[9px] font-bold text-amber-500 uppercase">${story.date}</span>
                                 <h4 class="text-sm font-bold leading-tight group-hover:text-amber-600 transition-colors line-clamp-2">
@@ -220,16 +222,14 @@
                                 </h4>
                             </div>
                         `;
-                        sidebar.innerHTML += sidebarItem;
                     }
 
-                    // 3. Inject into News Ticker (Bottom)
-                    const tickerItem = `
+                    // 3. Ticker
+                    ticker.innerHTML += `
                         <span class="text-xs font-bold tracking-wide">
                             <span class="text-amber-400">●</span> ${story.title.toUpperCase()}
                         </span>
                     `;
-                    ticker.innerHTML += tickerItem;
                 });
 
             } catch (error) {
@@ -237,13 +237,11 @@
                 container.innerHTML = `
                     <div class="bg-red-50 p-10 rounded-3xl text-center border border-red-100">
                         <p class="text-red-500 font-black uppercase text-[10px] tracking-widest">Critical Error: Unable to sync with feed source.</p>
-                        <p class="text-slate-400 text-xs mt-2">Ensure you are running on http://localhost via WAMP.</p>
                     </div>
                 `;
             }
         }
 
-        // Run on load
         window.onload = loadStories;
     </script>
 </body>
