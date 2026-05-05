@@ -1,0 +1,124 @@
+/* 
+  VOICES AT WORK - Core Stylesheet
+  Theme: Modern Corporate / Minimalist
+  Primary Color: Blue-600 (#2563eb)
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+:root {
+    --primary: #2563eb;
+    --bg-main: #f8fafc;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-main);
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Smooth Image Transitions */
+img {
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom Scrollbar for a Premium Feel */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Article Card Hover Effects */
+article {
+    transition: all 0.4s ease;
+    backface-visibility: hidden;
+}
+
+article:hover {
+    border-color: rgba(37, 99, 235, 0.1);
+}
+
+/* Category Badge Backdrop Blur */
+.backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Loading Spinner Animation */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Line Clamp Logic (Backup for browsers not supporting Tailwind line-clamp) */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+/* Typography Enhancements */
+h3 {
+    letter-spacing: -0.025em;
+}
+
+/* Post Content Styling (Inside the blog posts) */
+.post-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.post-content blockquote {
+    border-left: 4px solid var(--primary);
+    padding-left: 1.5rem;
+    font-style: italic;
+    color: #475569;
+    margin: 2rem 0;
+}
+
+/* Media Gallery Grid */
+.gallery-grid img {
+    cursor: zoom-in;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    opacity: 0.9;
+}
+
+/* Admin Specific Overrides */
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Success Animation for the Admin Notification */
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-bounce {
+    animation: slideUp 0.5s ease-out;
+}

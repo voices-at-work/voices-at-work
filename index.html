@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voices At Work | The Modern Workplace Feed</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Real thoughts and professional insights from the modern work environment.">
+    
+    <!-- CSS Integration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Inspiration Palette Overrides */
+        :root {
+            --inspiration-gold: #f59e0b;
+            --inspiration-dark: #1e1b4b;
+        }
+        .bg-inspiration { background-color: var(--inspiration-gold); }
+        .text-inspiration { color: var(--inspiration-gold); }
+        
+        /* Ticker Animation */
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+        }
+        .ticker-container:hover .animate-ticker {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="bg-[#fafaf9] text-slate-900 font-sans">
+
+    <!-- Premium Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-orange-100">
+        <div class="max-w-[1600px] mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-inspiration rounded-lg flex items-center justify-center shadow-lg shadow-amber-200">
+                    <span class="text-white font-black text-xs">V</span>
+                </div>
+                <h1 class="font-black text-xl tracking-tighter uppercase text-indigo-950">Voices At Work</h1>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8 text-[11px] font-bold uppercase tracking-widest text-slate-400">
+                <a href="index.html" class="text-inspiration transition-colors">Voices</a>
+                <a href="inspiration.html" class="hover:text-indigo-950 transition-colors">Inspiration</a>
+                <a href="services.html" class="hover:text-indigo-950 transition-colors">Services</a>
+                <a href="support.html" class="px-6 py-3 bg-indigo-950 text-white rounded-xl hover:bg-amber-500 transition-all shadow-lg shadow-indigo-100">
+                    Support Our Work
+                </a>
+            </div>
+
+            <button class="md:hidden p-2 text-slate-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Google Ad Slot 1: Top Banner -->
+    <div class="max-w-7xl mx-auto mt-6 px-6">
+        <div class="w-full h-24 bg-slate-100 border border-dashed border-slate-300 flex items-center justify-center text-[10px] text-slate-400 uppercase tracking-widest rounded-xl">
+            Google Ad Placeholder - Leaderboard
+        </div>
+    </div>
+
+    <!-- 3-Column Layout -->
+    <div class="max-w-[1600px] mx-auto mt-12 px-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- COLUMN 1: FAR LEFT (Previous Stories) -->
+        <aside class="lg:col-span-2 space-y-6">
+            <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 border-b border-slate-100 pb-2">Recent Archives</h3>
+            <div id="previous-stories-sidebar" class="space-y-4">
+                <!-- Data injected by app.js -->
+                <div class="group cursor-pointer">
+                    <span class="text-[9px] font-bold text-amber-500 uppercase">March 24</span>
+                    <h4 class="text-sm font-bold leading-tight group-hover:text-amber-600 transition-colors">The remote work burnout paradox</h4>
+                </div>
+                <div class="group cursor-pointer">
+                    <span class="text-[9px] font-bold text-amber-500 uppercase">March 22</span>
+                    <h4 class="text-sm font-bold leading-tight group-hover:text-amber-600 transition-colors">Leading with Empathy in Tech</h4>
+                </div>
+            </div>
+
+            <!-- Google Ad Slot 2: Sidebar -->
+            <div class="w-full h-64 bg-slate-50 border border-slate-100 flex items-center justify-center text-[9px] text-slate-300 uppercase rounded-xl">
+                Sidebar Ad
+            </div>
+        </aside>
+
+        <!-- COLUMN 2: MIDDLE (Main Story Feed) -->
+        <main class="lg:col-span-7">
+            <header class="mb-10">
+                <h2 class="text-4xl md:text-6xl font-black text-indigo-950 leading-[1.1] mb-6 tracking-tight">
+                    Purely <span class="text-inspiration">Inspired.</span>
+                </h2>
+                <div class="flex flex-wrap gap-3">
+                    <button class="px-5 py-2 bg-inspiration text-white rounded-full text-xs font-bold uppercase tracking-wider shadow-md">Latest Feed</button>
+                    <button class="px-5 py-2 bg-white border border-slate-200 text-slate-500 rounded-full text-xs font-bold uppercase tracking-wider">Culture</button>
+                </div>
+            </header>
+
+            <div id="stories-container" class="space-y-12">
+                <!-- Main stories injected by app.js -->
+            </div>
+        </main>
+
+        <!-- COLUMN 3: RIGHT (Featured / Ads / Categories) -->
+        <aside class="lg:col-span-3 space-y-8">
+            <div class="bg-indigo-950 p-8 rounded-3xl text-white shadow-2xl shadow-indigo-200">
+                <h3 class="text-amber-400 text-[10px] font-black uppercase tracking-widest mb-2">Featured Insight</h3>
+                <p class="text-lg font-bold leading-snug">"The best way to predict the future is to create it within your team."</p>
+            </div>
+
+            <!-- Google Ad Slot 3: Large Square -->
+            <div class="w-full h-[400px] bg-slate-100 border border-dashed border-slate-300 flex items-center justify-center text-[10px] text-slate-400 uppercase tracking-widest rounded-3xl">
+                Google Ad Placeholder - Display
+            </div>
+        </aside>
+    </div>
+
+    <!-- Clean Footer -->
+    <footer class="max-w-[1600px] mx-auto mt-16 py-12 px-6 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center text-slate-400">
+        <p class="text-xs font-medium uppercase tracking-widest mb-4 md:mb-0">© 2026 VOICES AT WORK | Built by Ohato</p>
+        <div class="flex space-x-6 text-[10px] font-black uppercase tracking-widest">
+            <a href="#" class="hover:text-amber-600 transition">Privacy</a>
+            <a href="#" class="hover:text-amber-600 transition">Terms</a>
+            <a href="#" class="hover:text-amber-600 transition">Twitter</a>
+        </div>
+    </footer>
+
+    <!-- News Ticker Bottom Bar -->
+    <div class="fixed bottom-0 left-0 w-full bg-indigo-950 text-white h-10 flex items-center overflow-hidden z-[100] ticker-container">
+        <div class="bg-inspiration h-full flex items-center px-6 z-10">
+            <span class="text-[10px] font-black uppercase tracking-tighter italic">Breaking Insights</span>
+        </div>
+        <div class="animate-ticker flex space-x-12">
+            <span class="text-xs font-bold tracking-wide">NEW STORY: The impact of AI on Nairobi's tech landscape</span>
+            <span class="text-xs font-bold tracking-wide">TRENDING: Why 'Chama' culture is the future of community banking</span>
+            <span class="text-xs font-bold tracking-wide">SPOTLIGHT: Rubrina Properties hits new marketing milestone</span>
+            <span class="text-xs font-bold tracking-wide">INSIGHT: Mastering system architecture with Laravel & FrankenPHP</span>
+        </div>
+    </div>
+
+    <!-- Core App Logic -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
