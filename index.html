@@ -173,7 +173,7 @@
                 ticker.innerHTML = '';
 
                 // Sort: Newest first
-                const sortedStories = stories.reverse();
+                const sortedStories = [...stories].reverse();
 
                 sortedStories.forEach((story, index) => {
                     // 1. Inject into Main Feed (Center)
@@ -191,7 +191,7 @@
                                 <div class="flex items-center space-x-4 mb-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                                     <span>${story.date}</span>
                                     <span class="w-1 h-1 bg-slate-200 rounded-full"></span>
-                                    <span>${story.reading_time}</span>
+                                    <span>${story.reading_time || '3 min read'}</span>
                                 </div>
                                 <h3 class="text-3xl font-black text-indigo-950 mb-4 group-hover:text-inspiration transition-colors">
                                     ${story.title}
@@ -201,9 +201,9 @@
                                 </p>
                                 <div class="flex items-center space-x-3">
                                     <div class="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-[10px] font-bold text-indigo-400">
-                                        ${story.author.charAt(0)}
+                                        ${story.author ? story.author.charAt(0) : 'V'}
                                     </div>
-                                    <span class="text-[11px] font-black uppercase tracking-widest text-indigo-950">${story.author}</span>
+                                    <span class="text-[11px] font-black uppercase tracking-widest text-indigo-950">${story.author || 'Voices Staff'}</span>
                                 </div>
                             </div>
                         </article>
@@ -216,7 +216,7 @@
                             <div class="group cursor-pointer">
                                 <span class="text-[9px] font-bold text-amber-500 uppercase">${story.date}</span>
                                 <h4 class="text-sm font-bold leading-tight group-hover:text-amber-600 transition-colors line-clamp-2">
-                                    ${story.title}
+                                    <a href="post.html?slug=${story.slug}">${story.title}</a>
                                 </h4>
                             </div>
                         `;
