@@ -33,6 +33,10 @@
         .ticker-container:hover .animate-ticker {
             animation-play-state: paused;
         }
+
+        /* Smooth image loading */
+        .story-card img { transition: transform 0.5s ease; }
+        .story-card:hover img { transform: scale(1.05); }
     </style>
 </head>
 <body class="bg-[#fafaf9] text-slate-900 font-sans">
@@ -74,19 +78,12 @@
     <!-- 3-Column Layout -->
     <div class="max-w-[1600px] mx-auto mt-12 px-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- COLUMN 1: FAR LEFT (Previous Stories) -->
+        <!-- COLUMN 1: FAR LEFT (Archives) -->
         <aside class="lg:col-span-2 space-y-6">
             <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 border-b border-slate-100 pb-2">Recent Archives</h3>
             <div id="previous-stories-sidebar" class="space-y-4">
-                <!-- Data injected by app.js -->
-                <div class="group cursor-pointer">
-                    <span class="text-[9px] font-bold text-amber-500 uppercase">March 24</span>
-                    <h4 class="text-sm font-bold leading-tight group-hover:text-amber-600 transition-colors">The remote work burnout paradox</h4>
-                </div>
-                <div class="group cursor-pointer">
-                    <span class="text-[9px] font-bold text-amber-500 uppercase">March 22</span>
-                    <h4 class="text-sm font-bold leading-tight group-hover:text-amber-600 transition-colors">Leading with Empathy in Tech</h4>
-                </div>
+                <!-- Data injected via JS -->
+                <p class="text-[10px] text-slate-300 animate-pulse">Loading archives...</p>
             </div>
 
             <!-- Google Ad Slot 2: Sidebar -->
@@ -107,16 +104,21 @@
                 </div>
             </header>
 
+            <!-- FEED CONTAINER -->
             <div id="stories-container" class="space-y-12">
-                <!-- Main stories injected by app.js -->
+                <!-- Main stories injected here -->
+                <div class="py-20 text-center">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-inspiration"></div>
+                    <p class="mt-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Fetching Latest Insights...</p>
+                </div>
             </div>
         </main>
 
-        <!-- COLUMN 3: RIGHT (Featured / Ads / Categories) -->
+        <!-- COLUMN 3: RIGHT (Featured / Ads) -->
         <aside class="lg:col-span-3 space-y-8">
             <div class="bg-indigo-950 p-8 rounded-3xl text-white shadow-2xl shadow-indigo-200">
                 <h3 class="text-amber-400 text-[10px] font-black uppercase tracking-widest mb-2">Featured Insight</h3>
-                <p class="text-lg font-bold leading-snug">"The best way to predict the future is to create it within your team."</p>
+                <p class="text-lg font-bold leading-snug" id="featured-quote">"The best way to predict the future is to create it within your team."</p>
             </div>
 
             <!-- Google Ad Slot 3: Large Square -->
@@ -141,15 +143,108 @@
         <div class="bg-inspiration h-full flex items-center px-6 z-10">
             <span class="text-[10px] font-black uppercase tracking-tighter italic">Breaking Insights</span>
         </div>
-        <div class="animate-ticker flex space-x-12">
-            <span class="text-xs font-bold tracking-wide">NEW STORY: The impact of AI on Nairobi's tech landscape</span>
-            <span class="text-xs font-bold tracking-wide">TRENDING: Why 'Chama' culture is the future of community banking</span>
-            <span class="text-xs font-bold tracking-wide">SPOTLIGHT: Rubrina Properties hits new marketing milestone</span>
-            <span class="text-xs font-bold tracking-wide">INSIGHT: Mastering system architecture with Laravel & FrankenPHP</span>
+        <div class="animate-ticker flex space-x-12" id="ticker-content">
+            <!-- Ticker items will be injected here -->
         </div>
     </div>
 
-    <!-- Core App Logic -->
-    <script src="assets/js/app.js"></script>
+    <!-- CORE FEED LOGIC -->
+    <script>
+        async function loadStories() {
+            const container = document.getElementById('stories-container');
+            const sidebar = document.getElementById('previous-stories-sidebar');
+            const ticker = document.getElementById('ticker-content');
+
+            try {
+                // IMPORTANT: Fetch from local path relative to index.html
+                const response = await fetch('assets/data/stories.json?v=' + Date.now());
+                if (!response.ok) throw new Error('Failed to load feed');
+                
+                const stories = await response.json();
+                
+                if (stories.length === 0) {
+                    container.innerHTML = `<p class="text-center text-slate-400 py-10 font-bold uppercase text-xs">No stories published yet.</p>`;
+                    return;
+                }
+
+                // Clear loaders
+                container.innerHTML = '';
+                sidebar.innerHTML = '';
+                ticker.innerHTML = '';
+
+                // Sort: Newest first
+                const sortedStories = stories.reverse();
+
+                sortedStories.forEach((story, index) => {
+                    // 1. Inject into Main Feed (Center)
+                    const card = `
+                        <article class="story-card group cursor-pointer overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-50 transition-all duration-500">
+                            <div class="relative h-[400px] overflow-hidden">
+                                <img src="${story.featured_image}" alt="${story.title}" class="w-full h-full object-cover">
+                                <div class="absolute top-6 left-6">
+                                    <span class="bg-white/90 backdrop-blur px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-indigo-950 shadow-sm">
+                                        ${story.category}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-10">
+                                <div class="flex items-center space-x-4 mb-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                                    <span>${story.date}</span>
+                                    <span class="w-1 h-1 bg-slate-200 rounded-full"></span>
+                                    <span>${story.reading_time}</span>
+                                </div>
+                                <h3 class="text-3xl font-black text-indigo-950 mb-4 group-hover:text-inspiration transition-colors">
+                                    ${story.title}
+                                </h3>
+                                <p class="text-slate-500 leading-relaxed line-clamp-3 mb-6">
+                                    ${story.content.replace(/<[^>]*>?/gm, '').substring(0, 180)}...
+                                </p>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center text-[10px] font-bold text-indigo-400">
+                                        ${story.author.charAt(0)}
+                                    </div>
+                                    <span class="text-[11px] font-black uppercase tracking-widest text-indigo-950">${story.author}</span>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                    container.innerHTML += card;
+
+                    // 2. Inject into Sidebar (Left)
+                    if (index < 5) { // Limit to 5
+                        const sidebarItem = `
+                            <div class="group cursor-pointer">
+                                <span class="text-[9px] font-bold text-amber-500 uppercase">${story.date}</span>
+                                <h4 class="text-sm font-bold leading-tight group-hover:text-amber-600 transition-colors line-clamp-2">
+                                    ${story.title}
+                                </h4>
+                            </div>
+                        `;
+                        sidebar.innerHTML += sidebarItem;
+                    }
+
+                    // 3. Inject into News Ticker (Bottom)
+                    const tickerItem = `
+                        <span class="text-xs font-bold tracking-wide">
+                            <span class="text-amber-400">●</span> ${story.title.toUpperCase()}
+                        </span>
+                    `;
+                    ticker.innerHTML += tickerItem;
+                });
+
+            } catch (error) {
+                console.error('Feed Error:', error);
+                container.innerHTML = `
+                    <div class="bg-red-50 p-10 rounded-3xl text-center border border-red-100">
+                        <p class="text-red-500 font-black uppercase text-[10px] tracking-widest">Critical Error: Unable to sync with feed source.</p>
+                        <p class="text-slate-400 text-xs mt-2">Ensure you are running on http://localhost via WAMP.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Run on load
+        window.onload = loadStories;
+    </script>
 </body>
 </html>
