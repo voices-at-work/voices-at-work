@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Voices At Work</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Inter:wght@400;600;800&display=swap');
+
+        :root {
+            --brand-red: #e11d48;
+            --brand-dark: #0f172a;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff; 
+            color: var(--brand-dark);
+            overflow: hidden; 
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .heading-font { font-family: 'Unbounded', sans-serif; }
+
+        /* Ticker Animation */
+        @keyframes ticker-slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .ticker-move {
+            display: flex;
+            width: max-content;
+            animation: ticker-slide 30s linear infinite;
+        }
+
+        /* Scrollable area for content columns */
+        .custom-scroll::-webkit-scrollbar { width: 3px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navbar -->
+    <nav class="h-14 border-b border-slate-100 flex-shrink-0 px-6 flex justify-between items-center bg-white">
+        <div class="flex items-center gap-8">
+            <a href="index.html" class="heading-font font-black text-xs tracking-tighter uppercase italic">
+                VOICES <span class="text-rose-600">AT WORK</span>
+            </a>
+            <div class="hidden md:flex gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                <a href="inspiration.html" class="hover:text-rose-600 transition">Inspiration</a>
+                <a href="services.html" class="text-rose-600">Our Services</a>
+                <a href="support.html" class="hover:text-rose-600 transition">Support Our Work</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+            <span class="text-[8px] font-black uppercase tracking-widest text-slate-400 italic">Services Active</span>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Far Left: Core Services (60%) -->
+        <main class="w-3/5 p-6 lg:p-8 border-r border-slate-100 overflow-y-auto custom-scroll">
+            <h3 class="text-[9px] font-black uppercase text-rose-600 mb-4 tracking-widest">Solutions</h3>
+            
+            <header class="mb-10">
+                <h1 class="text-2xl heading-font font-black leading-tight tracking-tighter mb-4">
+                    HIGH PERFORMANCE <br> <span class="italic text-slate-400">DEVELOPMENT</span>
+                </h1>
+                <p class="text-xs text-slate-500 leading-relaxed max-w-lg">
+                    We specialize in lightweight, high-concurrency systems built for speed and reliability. No bloat, no unnecessary abstractions—just clean, direct architecture.
+                </p>
+            </header>
+
+            <div class="space-y-10">
+                <!-- Service 1 -->
+                <div class="group">
+                    <span class="text-[8px] font-black uppercase text-slate-300 tracking-[.2em]">01 / Backend</span>
+                    <h2 class="text-lg font-bold mt-1 group-hover:text-rose-600 transition">System Architecture & APIs</h2>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                        Scalable backend solutions using Laravel and Python. We optimize for high-speed delivery using direct server configurations and FrankenPHP for sub-millisecond response times.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group">
+                    <span class="text-[8px] font-black uppercase text-slate-300 tracking-[.2em]">02 / Web</span>
+                    <h2 class="text-lg font-bold mt-1 group-hover:text-rose-600 transition">Lightweight Web Portals</h2>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                        Design and development of fast-feed mobile-first news portals and management systems. We focus on Core Web Vitals and eliminating layout shift for superior user experience.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group">
+                    <span class="text-[8px] font-black uppercase text-slate-300 tracking-[.2em]">03 / Marketing</span>
+                    <h2 class="text-lg font-bold mt-1 group-hover:text-rose-600 transition">SEO & Content Strategy</h2>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                        Data-driven real estate marketing and video SEO. We craft high-converting descriptions and metadata to ensure your digital assets reach the right eyes instantly.
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Far Right: Stack & Process (40%) -->
+        <aside class="w-2/5 bg-slate-50/50 p-6 lg:p-8 overflow-y-auto custom-scroll">
+            <h3 class="text-[9px] font-black uppercase text-slate-400 mb-4 tracking-widest">The Stack</h3>
+            
+            <div class="grid grid-cols-2 gap-2 mb-10">
+                <div class="bg-white border border-slate-200 p-3 rounded flex flex-col items-center justify-center text-center">
+                    <span class="text-[10px] font-black">LARAVEL</span>
+                    <span class="text-[7px] text-slate-400 uppercase font-bold">Backend</span>
+                </div>
+                <div class="bg-white border border-slate-200 p-3 rounded flex flex-col items-center justify-center text-center">
+                    <span class="text-[10px] font-black">PYTHON</span>
+                    <span class="text-[7px] text-slate-400 uppercase font-bold">Automation</span>
+                </div>
+                <div class="bg-white border border-slate-200 p-3 rounded flex flex-col items-center justify-center text-center">
+                    <span class="text-[10px] font-black">FIREBASE</span>
+                    <span class="text-[7px] text-slate-400 uppercase font-bold">Real-time</span>
+                </div>
+                <div class="bg-white border border-slate-200 p-3 rounded flex flex-col items-center justify-center text-center">
+                    <span class="text-[10px] font-black">FRANKENPHP</span>
+                    <span class="text-[7px] text-slate-400 uppercase font-bold">Runtime</span>
+                </div>
+            </div>
+
+            <div class="mt-8 border-t border-slate-200 pt-8">
+                <h4 class="text-[9px] font-black uppercase text-slate-400 mb-4 tracking-widest">Our Methodology</h4>
+                <div class="space-y-4">
+                    <div class="flex gap-3">
+                        <span class="text-rose-600 font-bold text-xs">/</span>
+                        <p class="text-[10px] font-semibold text-slate-600 leading-tight">Direct infrastructure management without Nginx overhead.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-rose-600 font-bold text-xs">/</span>
+                        <p class="text-[10px] font-semibold text-slate-600 leading-tight">Local-first system monitoring for network tools.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <span class="text-rose-600 font-bold text-xs">/</span>
+                        <p class="text-[10px] font-semibold text-slate-600 leading-tight">SEO-optimized content tailored for conversion.</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Ticker -->
+    <div class="h-12 bg-black border-t border-rose-600 flex items-center overflow-hidden flex-shrink-0">
+        <div class="ticker-move">
+            <div id="ticker-content" class="flex items-center">
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">Full-Stack Development</span>
+                </div>
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">Real Estate SEO</span>
+                </div>
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">System Architecture</span>
+                </div>
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">News Portal Implementation</span>
+                </div>
+            </div>
+            <!-- Duplicate for loop -->
+            <div class="flex items-center">
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">Full-Stack Development</span>
+                </div>
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">Real Estate SEO</span>
+                </div>
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">System Architecture</span>
+                </div>
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">News Portal Implementation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="h-8 bg-white border-t border-slate-100 flex items-center justify-between px-6 flex-shrink-0">
+        <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+            © <span id="current-year"></span> VOICES AT WORK — By THE CONTINENT VENTURES
+        </p>
+        <div class="flex gap-4 text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+            <span class="text-slate-300 italic">Powered By THE CONTINENT VENTURES</span>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

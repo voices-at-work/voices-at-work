@@ -4,56 +4,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inspiration | Voices At Work</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
-        .serif { font-family: 'Playfair Display', serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Inter:wght@400;600;800&display=swap');
+
+        :root {
+            --brand-red: #e11d48;
+            --brand-dark: #0f172a;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff; 
+            color: var(--brand-dark);
+            overflow: hidden; 
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .heading-font { font-family: 'Unbounded', sans-serif; }
+
+        /* Ticker Animation */
+        @keyframes ticker-slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .ticker-move {
+            display: flex;
+            width: max-content;
+            animation: ticker-slide 30s linear infinite;
+        }
+
+        /* Scrollable area for content columns */
+        .custom-scroll::-webkit-scrollbar { width: 3px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-white text-gray-900">
+<body class="antialiased">
 
-    <!-- Simple Navigation -->
-    <nav class="p-6 flex justify-between items-center border-b border-gray-100">
-        <a href="index.html" class="font-bold text-xl tracking-tighter">VOICES AT WORK</a>
-        <div class="space-x-8 text-sm uppercase tracking-widest font-medium">
-            <a href="index.html" class="text-gray-400 hover:text-black transition">Voices</a>
-            <a href="inspiration.html" class="text-black">Inspiration</a>
-            <a href="services.html" class="text-gray-400 hover:text-black transition">Services</a>
+    <!-- Navbar -->
+    <nav class="h-14 border-b border-slate-100 flex-shrink-0 px-6 flex justify-between items-center bg-white">
+        <div class="flex items-center gap-8">
+            <a href="index.html" class="heading-font font-black text-xs tracking-tighter uppercase italic">
+                VOICES <span class="text-rose-600">AT WORK</span>
+            </a>
+            <div class="hidden md:flex gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                <a href="inspiration.html" class="text-rose-600">Inspiration</a>
+                <a href="services.html" class="hover:text-rose-600 transition">Our Services</a>
+                <a href="support.html" class="hover:text-rose-600 transition">Support Our Work</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="w-1.5 h-1.5 rounded-full bg-rose-600"></div>
+            <span class="text-[8px] font-black uppercase tracking-widest text-slate-400 italic">Online</span>
         </div>
     </nav>
 
-    <main class="max-w-5xl mx-auto py-20 px-6">
-        <section class="text-center mb-24">
-            <h2 class="serif text-5xl md:text-7xl mb-6 italic">Fuel for the Daily Grind.</h2>
-            <p class="text-gray-500 uppercase tracking-widest text-sm">Curated thoughts to shift your perspective.</p>
-        </section>
-
-        <!-- Inspiration Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+    <!-- Main Content Area (Layout mirrored from index.html) -->
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Far Left: Main Content (60%) -->
+        <main class="w-3/5 p-6 lg:p-8 border-r border-slate-100 overflow-y-auto custom-scroll">
+            <h3 class="text-[9px] font-black uppercase text-rose-600 mb-4 tracking-widest">The Muse</h3>
             
-            <!-- Quote 1 -->
-            <div class="space-y-4">
-                <span class="text-xs font-bold text-blue-600 uppercase">Leadership</span>
-                <blockquote class="serif text-3xl leading-snug">"The best leaders don't give you a voice; they ensure you feel safe enough to use the one you already have."</blockquote>
-                <cite class="block text-gray-400">— Anonymous Manager</cite>
+            <header class="mb-10">
+                <h1 class="text-2xl heading-font font-black leading-tight tracking-tighter mb-4">
+                    CURATED <br> <span class="italic">PERSPECTIVES</span>
+                </h1>
+                <p class="text-xs text-slate-500 leading-relaxed max-w-lg">
+                    A high-density collection of visual and philosophical references that guide our system architecture and creative output.
+                </p>
+            </header>
+
+            <div class="grid grid-cols-1 gap-8">
+                <!-- Entry 1 -->
+                <div class="group border-l-4 border-slate-900 pl-6 py-2">
+                    <span class="text-[8px] font-black uppercase text-slate-300 tracking-widest">Philosophy</span>
+                    <h2 class="text-lg font-bold mt-1 group-hover:text-rose-600 transition">Simplicity as Sophistication</h2>
+                    <p class="text-xs text-slate-500 mt-2 italic leading-relaxed">
+                        "Complexity is your enemy. Any fool can make something complicated. It is hard to keep things simple."
+                    </p>
+                </div>
+
+                <!-- Entry 2 -->
+                <div class="group border-l-4 border-slate-900 pl-6 py-2">
+                    <span class="text-[8px] font-black uppercase text-slate-300 tracking-widest">Architecture</span>
+                    <h2 class="text-lg font-bold mt-1 group-hover:text-rose-600 transition">The Uncluttered Mind</h2>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                        Optimizing for FrankenPHP and avoiding the bloat of traditional Nginx setups is a reflection of this core value.
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Far Right: Secondary Content (40%) -->
+        <aside class="w-2/5 bg-slate-50/50 p-6 lg:p-8 overflow-y-auto custom-scroll">
+            <h3 class="text-[9px] font-black uppercase text-slate-400 mb-4 tracking-widest">Visual Log</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Visual Cards -->
+                <div class="aspect-square bg-slate-200 rounded-lg flex items-center justify-center text-[8px] font-bold text-slate-400 uppercase italic p-4 text-center">Ref_01: Minimalist Grid</div>
+                <div class="aspect-square bg-slate-200 rounded-lg flex items-center justify-center text-[8px] font-bold text-slate-400 uppercase italic p-4 text-center">Ref_02: Brutalist UI</div>
+                <div class="aspect-square bg-slate-200 rounded-lg flex items-center justify-center text-[8px] font-bold text-slate-400 uppercase italic p-4 text-center">Ref_03: Monochromatic</div>
+                <div class="aspect-square bg-slate-200 rounded-lg flex items-center justify-center text-[8px] font-bold text-slate-400 uppercase italic p-4 text-center">Ref_04: High Contrast</div>
             </div>
 
-            <!-- Quote 2 (Staggered Down) -->
-            <div class="space-y-4 md:mt-24">
-                <span class="text-xs font-bold text-green-600 uppercase">Growth</span>
-                <blockquote class="serif text-3xl leading-snug">"Your career is a marathon, not a sprint. Pace your passion to avoid the burnout."</blockquote>
-                <cite class="block text-gray-400">— Workplace Mentor</cite>
+            <div class="mt-12">
+                <h4 class="text-[9px] font-black uppercase text-slate-400 mb-4 tracking-widest">Reading List</h4>
+                <ul class="space-y-3">
+                    <li class="text-[10px] font-bold text-slate-600 hover:text-rose-600 transition cursor-pointer">The Pragmatic Programmer</li>
+                    <li class="text-[10px] font-bold text-slate-600 hover:text-rose-600 transition cursor-pointer">Laws of Simplicity</li>
+                    <li class="text-[10px] font-bold text-slate-600 hover:text-rose-600 transition cursor-pointer">Systems Thinking</li>
+                </ul>
             </div>
+        </aside>
+    </div>
 
-            <!-- Quote 3 -->
-            <div class="space-y-4">
-                <span class="text-xs font-bold text-purple-600 uppercase">Balance</span>
-                <blockquote class="serif text-3xl leading-snug">"A job is what you do, not who you are. Reclaim your identity outside the nine-to-five."</blockquote>
-                <cite class="block text-gray-400">— Career Architect</cite>
+    <!-- Ticker: Mirrored from index.html -->
+    <div class="h-12 bg-black border-t border-rose-600 flex items-center overflow-hidden flex-shrink-0">
+        <div class="ticker-move">
+            <div id="ticker-content" class="flex items-center">
+                <!-- Content will mirror stories.json or static items -->
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">Explore Philosophy</span>
+                </div>
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">System Architecture</span>
+                </div>
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">Direct Server Performance</span>
+                </div>
             </div>
-
+            <!-- Duplicate for loop -->
+            <div class="flex items-center">
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">Explore Philosophy</span>
+                </div>
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">System Architecture</span>
+                </div>
+                <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                    <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">Direct Server Performance</span>
+                </div>
+            </div>
         </div>
-    </main>
+    </div>
 
+    <!-- Footer: Auto Year -->
+    <footer class="h-8 bg-white border-t border-slate-100 flex items-center justify-between px-6 flex-shrink-0">
+        <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+            © <span id="current-year"></span> VOICES AT WORK — By THE CONTINENT VENTURES
+        </p>
+        <div class="flex gap-4 text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+            <a href="index.html" class="hover:text-rose-600 transition">Back to The Home Page</a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

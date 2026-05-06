@@ -3,294 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voices At Work | The Modern Workplace Feed</title>
+    <title>Voices At Work | Intelligence Portal</title>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Real thoughts and professional insights from the modern work environment.">
-    
-    <!-- CSS Integration -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Playfair+Display:ital,wght@0,900;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Inter:wght@400;600;800&display=swap');
 
         :root {
-            --accent: #f59e0b;
-            --deep: #0f172a;
-            --soft-bg: #f8f7f4;
+            --brand-red: #e11d48;
+            --brand-dark: #0f172a;
         }
 
-        body { font-family: 'Space Grotesk', sans-serif; background-color: var(--soft-bg); }
-        .serif { font-family: 'Playfair Display', serif; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #ffffff; 
+            color: var(--brand-dark);
+            overflow: hidden; 
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .heading-font { font-family: 'Unbounded', sans-serif; }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--soft-bg); }
-        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
-
-        /* Ticker Animation */
-        @keyframes ticker {
+        @keyframes ticker-slide {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-        .animate-ticker {
+        .ticker-move {
             display: flex;
-            width: fit-content;
-            animation: ticker 40s linear infinite;
+            width: max-content;
+            animation: ticker-slide 30s linear infinite;
         }
+        .ticker-move:hover { animation-play-state: paused; }
 
-        /* Card Hover Effects */
-        .story-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .story-card:hover { transform: translateY(-8px); }
-        
-        .image-zoom { overflow: hidden; }
-        .image-zoom img { transition: transform 0.8s scale; }
-        .story-card:hover img { transform: scale(1.08); }
+        .custom-scroll::-webkit-scrollbar { width: 3px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
 
-        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
     </style>
 </head>
-<body class="text-slate-900">
+<body class="antialiased">
 
-    <!-- Minimalist Premium Nav -->
-    <nav class="fixed top-0 w-full z-[100] glass-nav border-b border-slate-200/50">
-        <div class="max-w-[1400px] mx-auto px-8 h-24 flex justify-between items-center">
-            <div class="flex items-center gap-12">
-                <a href="index.html" class="group flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-deep rounded-full flex items-center justify-center group-hover:bg-accent transition-colors duration-500">
-                        <span class="text-white font-bold text-lg">V</span>
-                    </div>
-                    <span class="text-2xl font-bold tracking-tighter uppercase serif pt-1">Voices</span>
-                </a>
-                
-                <div class="hidden lg:flex items-center space-x-10 text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
-                    <a href="index.html" class="text-accent border-b-2 border-accent pb-1">Insights</a>
-                    <a href="inspiration.html" class="hover:text-deep transition-colors">Inspiration</a>
-                    <a href="services.html" class="hover:text-deep transition-colors">Services</a>
-                </div>
+    <!-- Navbar -->
+    <nav class="h-14 border-b border-slate-100 flex-shrink-0 px-6 flex justify-between items-center bg-white z-50">
+        <div class="flex items-center gap-8">
+            <a href="index.html" class="heading-font font-black text-xs tracking-tighter uppercase italic">
+                VOICES <span class="text-rose-600">AT WORK</span>
+            </a>
+            <div class="hidden md:flex gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                <a href="inspiration.html" class="hover:text-rose-600 transition">Inspiration</a>
+                <a href="services.html" class="hover:text-rose-600 transition">Our Services</a>
+                <a href="support.html" class="hover:text-rose-600 transition">Support Our Work</a>
             </div>
-
-            <div class="flex items-center gap-6">
-                <a href="support.html" class="hidden sm:block text-[10px] font-bold uppercase tracking-widest bg-deep text-white px-8 py-4 rounded-full hover:bg-accent hover:shadow-xl transition-all">
-                    Support The Mission
-                </a>
-                <button class="p-2 border border-slate-200 rounded-full hover:bg-white transition">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                </button>
-            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+            <span class="text-[8px] font-black uppercase tracking-widest text-slate-400">Online</span>
         </div>
     </nav>
 
-    <!-- Top Ad Space -->
-    <div class="pt-32 pb-6 max-w-[1400px] mx-auto px-8">
-        <div class="w-full h-12 bg-white/50 border border-slate-200 flex items-center justify-center text-[9px] font-bold text-slate-300 uppercase tracking-widest rounded-lg">
-            Sponsorship Placement
-        </div>
-    </div>
-
-    <!-- Editorial Hero Header -->
-    <header class="max-w-[1400px] mx-auto px-8 py-12 grid lg:grid-cols-2 gap-12 items-end">
-        <div>
-            <span class="inline-block px-3 py-1 bg-accent/10 text-accent text-[10px] font-black uppercase tracking-[0.2em] rounded mb-6">Vol. 02 — Issue 2026</span>
-            <h1 class="text-7xl md:text-9xl serif italic font-black leading-none text-deep">
-                The <span class="text-accent">Truth</span> <br> At Work.
-            </h1>
-        </div>
-        <div class="lg:pb-4 border-l border-slate-200 pl-8">
-            <p class="text-xl text-slate-500 leading-relaxed max-w-md">
-                Unfiltered professional insights, corporate culture critique, and the human stories behind the modern economy.
-            </p>
-        </div>
-    </header>
-
-    <!-- Main Content Grid -->
-    <main class="max-w-[1400px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 pb-32">
+    <!-- Main Content Area -->
+    <div class="flex flex-1 overflow-hidden">
         
-        <!-- Feed Column (Left) -->
-        <div class="lg:col-span-8">
-            <div class="flex items-center justify-between border-b border-deep pb-4 mb-12">
-                <h2 class="text-xs font-black uppercase tracking-widest italic">The Latest Dispatch</h2>
-                <div class="flex gap-4">
-                    <button class="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center hover:bg-deep hover:text-white transition cursor-pointer">←</button>
-                    <button class="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center hover:bg-deep hover:text-white transition cursor-pointer">→</button>
-                </div>
+        <!-- Far Left: Main Story (Scrollable) -->
+        <main class="w-3/5 p-6 lg:p-8 border-r border-slate-100 overflow-y-auto custom-scroll">
+            <h3 class="text-[9px] font-black uppercase text-rose-600 mb-4 tracking-widest">Lead Dispatch</h3>
+            <div id="main-story-target">
+                <!-- Data via JS -->
             </div>
+        </main>
 
-            <!-- Feed Container -->
-            <div id="stories-container" class="space-y-24">
-                <!-- Data injected via JS -->
-                <div class="animate-pulse flex flex-col gap-8">
-                    <div class="h-96 bg-slate-200 rounded-3xl w-full"></div>
-                    <div class="h-10 bg-slate-200 w-3/4"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Side: Curation & Ad -->
-        <aside class="lg:col-span-4 space-y-16">
+        <!-- Far Right: Sidebar (Split Layout) -->
+        <aside class="w-2/5 bg-slate-50/50 flex flex-col overflow-hidden border-l border-slate-100">
             
-            <!-- Sticky Sidebar Content -->
-            <div class="sticky top-32 space-y-16">
-                <!-- Featured Box -->
-                <div class="bg-deep rounded-[40px] p-10 text-white relative overflow-hidden group">
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-accent/20 rounded-full blur-3xl group-hover:bg-accent/40 transition duration-700"></div>
-                    <h3 class="text-accent text-[10px] font-black uppercase tracking-widest mb-8">Daily Reflection</h3>
-                    <p class="text-3xl serif italic mb-8" id="featured-quote">"The culture of a company is the sum of the behaviors you reward."</p>
-                    <div class="h-[1px] w-full bg-white/10 mb-8"></div>
-                    <p class="text-xs text-slate-400 leading-loose">A recurring series on workplace ethics and the evolution of leadership in the digital age.</p>
-                </div>
-
-                <!-- Archives -->
-                <div>
-                    <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-8 border-b border-slate-200 pb-2">Previous Notes</h3>
-                    <div id="previous-stories-sidebar" class="space-y-8">
-                        <!-- Data injected via JS -->
+            <!-- Fixed Search Bar -->
+            <div class="p-6 border-b border-slate-200 bg-slate-50/80 backdrop-blur-sm">
+                <div class="relative">
+                    <input type="text" placeholder="SEARCH ARCHIVES..." class="w-full bg-transparent border border-slate-300 rounded-md py-2 px-3 text-[10px] font-bold tracking-widest focus:outline-none focus:border-rose-600 transition uppercase">
+                    <div class="absolute right-3 top-2.5">
+                        <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
                 </div>
+            </div>
 
-                <!-- Ad Slot -->
-                <div class="bg-slate-100 h-80 rounded-3xl border border-slate-200 flex flex-col items-center justify-center p-8 text-center">
-                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-4">Partner Highlight</span>
-                    <div class="w-16 h-[1px] bg-slate-300 mb-4"></div>
-                    <p class="text-xs text-slate-400 italic">Support independent journalism through verified sponsorships.</p>
+            <!-- Scrollable Briefing List -->
+            <div class="flex-1 p-6 lg:p-8 overflow-y-auto custom-scroll">
+                <h3 class="text-[9px] font-black uppercase text-slate-400 mb-4 tracking-widest">Previous Briefings</h3>
+                <div id="sidebar-target" class="space-y-6">
+                    <!-- Data via JS -->
+                </div>
+            </div>
+
+            <!-- Fluid Ad Space (Fixed at bottom of sidebar) -->
+            <div class="p-4 border-t border-slate-200 bg-white/50">
+                <h3 class="text-[7px] font-black uppercase text-slate-300 mb-1 tracking-[0.2em] italic">Advertisement</h3>
+                <div class="min-h-[90px] w-full flex items-center justify-center">
+                    <!-- Responsive Fluid AdSense Placeholder -->
+                    <ins class="adsbygoogle"
+                         style="display:block;width:100%;"
+                         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                         data-ad-slot="XXXXXXXXXX"
+                         data-ad-format="horizontal"
+                         data-full-width-responsive="true"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    <span class="text-[8px] text-slate-200 font-black uppercase tracking-widest border border-dashed border-slate-200 px-4 py-2">Fluid Ad Component</span>
                 </div>
             </div>
         </aside>
-    </main>
+    </div>
 
-    <!-- Full Width Footer -->
-    <footer class="bg-deep text-white pt-24 pb-12">
-        <div class="max-w-[1400px] mx-auto px-8">
-            <div class="grid md:grid-cols-4 gap-12 mb-20">
-                <div class="col-span-2">
-                    <h2 class="text-5xl serif italic font-black mb-8">Voices At Work</h2>
-                    <p class="text-slate-400 max-w-sm leading-relaxed">A digital feed for the modern professional. Built for high-performance, local-first system architecture. Built by Derrick Ohato.</p>
-                </div>
-                <div>
-                    <h4 class="text-accent text-[10px] font-black uppercase tracking-[0.2em] mb-6">Navigation</h4>
-                    <ul class="space-y-4 text-sm font-bold uppercase tracking-tighter">
-                        <li><a href="#" class="hover:text-accent transition">Archives</a></li>
-                        <li><a href="#" class="hover:text-accent transition">About</a></li>
-                        <li><a href="#" class="hover:text-accent transition">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-accent text-[10px] font-black uppercase tracking-[0.2em] mb-6">Social</h4>
-                    <ul class="space-y-4 text-sm font-bold uppercase tracking-tighter">
-                        <li><a href="#" class="hover:text-accent transition">YouTube Channel</a></li>
-                        <li><a href="#" class="hover:text-accent transition">Twitter / X</a></li>
-                        <li><a href="#" class="hover:text-accent transition">RSS Feed</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
-                <p>© 2026 VOICES AT WORK. NO NGINX. JUST PURE SPEED.</p>
-                <div class="flex gap-8 mt-4 md:mt-0">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Premium Bottom Ticker -->
-    <div class="fixed bottom-0 w-full bg-accent h-12 flex items-center overflow-hidden z-[200]">
-        <div class="bg-deep text-white h-full px-8 flex items-center z-10 skew-x-[-12deg] -ml-4">
-            <span class="text-[10px] font-black uppercase tracking-[0.2em] skew-x-[12deg]">Market Pulse</span>
-        </div>
-        <div class="animate-ticker space-x-12 pr-12">
-            <div id="ticker-content" class="flex space-x-12 items-center text-deep text-xs font-black uppercase tracking-wider">
-                <!-- Injected via JS -->
-            </div>
-            <!-- Duplicate for seamless loop -->
-            <div id="ticker-content-clone" class="flex space-x-12 items-center text-deep text-xs font-black uppercase tracking-wider">
-            </div>
+    <!-- Ticker -->
+    <div class="h-12 bg-black border-t border-rose-600 flex items-center overflow-hidden flex-shrink-0">
+        <div class="ticker-move">
+            <div id="ticker-content" class="flex items-center"></div>
+            <div id="ticker-content-clone" class="flex items-center"></div>
         </div>
     </div>
 
-    <!-- FEED LOGIC -->
+    <!-- Footer -->
+    <footer class="h-8 bg-white border-t border-slate-100 flex items-center justify-between px-6 flex-shrink-0">
+        <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+            © <span id="current-year"></span> VOICES AT WORK — By THE CONTINENT VENTURES
+        </p>
+        <div class="flex gap-4 text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+            <span class="text-slate-300 italic">The Continent Ventures Systems</span>
+        </div>
+    </footer>
+
     <script>
-        async function loadStories() {
-            const container = document.getElementById('stories-container');
-            const sidebar = document.getElementById('previous-stories-sidebar');
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        async function initPortal() {
+            const mainTarget = document.getElementById('main-story-target');
+            const sidebarTarget = document.getElementById('sidebar-target');
             const ticker = document.getElementById('ticker-content');
             const tickerClone = document.getElementById('ticker-content-clone');
 
             try {
-                const response = await fetch('assets/data/stories.json?v=' + Date.now());
-                const stories = await response.json();
-                
-                if (stories.length === 0) {
-                    container.innerHTML = `<p class="text-slate-400">Silence in the feed...</p>`;
-                    return;
-                }
+                const response = await fetch('assets/data/stories.json?t=' + Date.now());
+                const stories = (await response.json()).reverse();
 
-                container.innerHTML = '';
-                sidebar.innerHTML = '';
+                mainTarget.innerHTML = '';
+                sidebarTarget.innerHTML = '';
                 ticker.innerHTML = '';
                 tickerClone.innerHTML = '';
 
-                const sortedStories = [...stories].reverse();
-
-                sortedStories.forEach((story, index) => {
-                    // MAIN CARDS - High End Editorial Style
-                    const card = `
-                        <article class="story-card flex flex-col gap-10">
-                            <div class="image-zoom rounded-[40px] shadow-2xl bg-slate-200">
-                                <a href="post.html?slug=${story.slug}">
-                                    <img src="${story.featured_image}" alt="${story.title}" class="w-full h-[600px] object-cover opacity-90 hover:opacity-100 transition-opacity">
-                                </a>
-                            </div>
-                            <div class="max-w-2xl">
-                                <div class="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-accent mb-6">
-                                    <span>${story.category}</span>
-                                    <span class="w-8 h-[1px] bg-slate-300"></span>
-                                    <span class="text-slate-400">${story.date}</span>
+                stories.forEach((story, index) => {
+                    if (index === 0) {
+                        mainTarget.innerHTML = `
+                            <article class="group">
+                                <div class="overflow-hidden rounded-lg mb-6 aspect-video bg-slate-100 shadow-sm">
+                                    <img src="${story.featured_image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
                                 </div>
-                                <h3 class="text-5xl serif font-black leading-[1.1] mb-6 hover:text-accent transition-colors">
-                                    <a href="post.html?slug=${story.slug}">${story.title}</a>
-                                </h3>
-                                <p class="text-lg text-slate-500 leading-relaxed mb-8">
-                                    ${story.content.replace(/<[^>]*>?/gm, '').substring(0, 220)}...
-                                </p>
-                                <a href="post.html?slug=${story.slug}" class="inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-widest group">
-                                    Continue Reading 
-                                    <div class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-deep group-hover:text-white transition-all">
-                                        →
-                                    </div>
-                                </a>
-                            </div>
-                        </article>
-                    `;
-                    container.innerHTML += card;
-
-                    // SIDEBAR
-                    if (index < 4) {
-                        sidebar.innerHTML += `
-                            <div class="flex gap-4 items-start group cursor-pointer">
-                                <div class="w-2 h-2 rounded-full bg-accent mt-2 group-hover:scale-150 transition"></div>
+                                <h2 class="text-2xl heading-font font-black leading-tight mb-4 tracking-tighter">
+                                    <a href="post.html?slug=${story.slug}" class="hover:text-rose-600 transition">${story.title}</a>
+                                </h2>
+                                <p class="text-xs text-slate-500 leading-relaxed mb-6">${story.content.replace(/<[^>]*>?/gm, '').substring(0, 300)}...</p>
+                                <a href="post.html?slug=${story.slug}" class="text-[9px] font-black uppercase tracking-widest border-b border-black pb-0.5 hover:text-rose-600 hover:border-rose-600 transition">Read Full Dispatch</a>
+                            </article>
+                        `;
+                    }
+                    else if (index > 0) {
+                        sidebarTarget.innerHTML += `
+                            <div class="flex gap-4 group cursor-pointer border-b border-slate-200/60 pb-4 last:border-0">
+                                <div class="w-16 h-16 flex-shrink-0 rounded bg-slate-200 overflow-hidden">
+                                    <img src="${story.featured_image}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500">
+                                </div>
                                 <div>
-                                    <h4 class="text-sm font-bold leading-tight group-hover:text-accent transition-colors">
+                                    <h4 class="text-xs font-bold leading-snug group-hover:text-rose-600 transition">
                                         <a href="post.html?slug=${story.slug}">${story.title}</a>
                                     </h4>
-                                    <span class="text-[9px] font-black text-slate-300 uppercase tracking-widest">${story.date}</span>
+                                    <p class="text-[8px] font-black text-slate-300 uppercase mt-1">${story.date}</p>
                                 </div>
                             </div>
                         `;
                     }
 
-                    // TICKER
-                    const tickerItem = `<span>${story.title} // </span>`;
+                    const tickerItem = `
+                        <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
+                            <div class="w-5 h-5 rounded-full bg-slate-700 overflow-hidden">
+                                <img src="${story.featured_image}" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">${story.title}</span>
+                        </div>
+                    `;
                     ticker.innerHTML += tickerItem;
                     tickerClone.innerHTML += tickerItem;
                 });
 
             } catch (error) {
-                container.innerHTML = `<div class="p-20 text-center serif italic text-2xl">The feed is temporarily disconnected.</div>`;
+                console.error("Portal Initialization Error:", error);
             }
         }
 
-        window.onload = loadStories;
+        window.onload = initPortal;
     </script>
 </body>
 </html>
