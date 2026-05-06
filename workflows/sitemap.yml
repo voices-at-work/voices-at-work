@@ -1,0 +1,29 @@
+name: Generate XML Sitemap
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  sitemap_job:
+    runs-on: ubuntu-latest
+    name: Generate Sitemap
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 
+
+    - name: Generate Sitemap
+      uses: cicirello/generate-sitemap@v1
+      with:
+        base-url-path: https://voices-at-work.github.io/voices-at-work/
+        include-pdf: false
+
+    - name: Commit and push sitemap
+      run: |
+        git config --global user.name 'Sitemap Bot'
+        git config --global user.email 'bot@users.noreply.github.com'
+        git add sitemap.xml
+        git commit -m "Automated sitemap update" || echo "No changes to commit"
+        git push
