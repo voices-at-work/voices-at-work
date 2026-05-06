@@ -18,10 +18,17 @@
             font-family: 'Inter', sans-serif; 
             background-color: #ffffff; 
             color: var(--brand-dark);
-            overflow: hidden; 
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Desktop specific height lock - Released on Mobile */
+        @media (min-width: 1024px) {
+            body {
+                overflow: hidden; 
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
         }
         
         .heading-font { font-family: 'Unbounded', sans-serif; }
@@ -45,9 +52,9 @@
 </head>
 <body class="antialiased">
 
-    <!-- Navbar -->
-    <nav class="h-14 border-b border-slate-100 flex-shrink-0 px-6 flex justify-between items-center bg-white">
-        <div class="flex items-center gap-8">
+    <!-- Navbar: Sticky on mobile -->
+    <nav class="h-14 border-b border-slate-100 flex-shrink-0 px-4 md:px-6 flex justify-between items-center bg-white sticky top-0 z-50">
+        <div class="flex items-center gap-4 md:gap-8">
             <a href="index.html" class="heading-font font-black text-xs tracking-tighter uppercase italic">
                 VOICES <span class="text-rose-600">AT WORK</span>
             </a>
@@ -58,30 +65,43 @@
             </div>
         </div>
         <div class="flex items-center gap-4">
-            <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-            <span class="text-[8px] font-black uppercase tracking-widest text-slate-400 italic">Services Active</span>
+            <div class="flex items-center gap-2">
+                <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                <span class="text-[8px] font-black uppercase tracking-widest text-slate-400 italic">Services Active</span>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-slate-400" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
         </div>
     </nav>
 
-    <!-- Main Content Area -->
-    <div class="flex flex-1 overflow-hidden">
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-nav" class="hidden md:hidden bg-slate-900 p-6 space-y-4 border-b border-rose-600 text-center">
+        <a href="inspiration.html" class="block text-[10px] font-bold uppercase tracking-widest text-white">Inspiration</a>
+        <a href="services.html" class="block text-[10px] font-bold uppercase tracking-widest text-rose-500">Our Services</a>
+        <a href="support.html" class="block text-[10px] font-bold uppercase tracking-widest text-white">Support Our Work</a>
+    </div>
+
+    <!-- Main Content Area: Flex-column on mobile -->
+    <div class="flex flex-col lg:flex-row flex-1 lg:overflow-hidden">
         
-        <!-- Far Left: Core Services (60%) -->
-        <main class="w-3/5 p-6 lg:p-8 border-r border-slate-100 overflow-y-auto custom-scroll">
+        <!-- Far Left: Core Services -->
+        <main class="w-full lg:w-3/5 p-6 lg:p-12 lg:border-r border-slate-100 lg:overflow-y-auto custom-scroll">
             <h3 class="text-[9px] font-black uppercase text-rose-600 mb-4 tracking-widest">Solutions</h3>
             
             <header class="mb-10">
-                <h1 class="text-2xl heading-font font-black leading-tight tracking-tighter mb-4">
-                    HIGH PERFORMANCE <br> <span class="italic text-slate-400">DEVELOPMENT</span>
+                <h1 class="text-2xl lg:text-4xl heading-font font-black leading-tight tracking-tighter mb-4 uppercase">
+                    High Performance <br> <span class="italic text-slate-400">Development</span>
                 </h1>
                 <p class="text-xs text-slate-500 leading-relaxed max-w-lg">
                     We specialize in lightweight, high-concurrency systems built for speed and reliability. No bloat, no unnecessary abstractions—just clean, direct architecture.
                 </p>
             </header>
 
-            <div class="space-y-10">
+            <div class="space-y-12">
                 <!-- Service 1 -->
-                <div class="group">
+                <div class="group border-l-2 border-slate-100 pl-6 hover:border-rose-600 transition">
                     <span class="text-[8px] font-black uppercase text-slate-300 tracking-[.2em]">01 / Backend</span>
                     <h2 class="text-lg font-bold mt-1 group-hover:text-rose-600 transition">System Architecture & APIs</h2>
                     <p class="text-xs text-slate-500 mt-2 leading-relaxed">
@@ -90,7 +110,7 @@
                 </div>
 
                 <!-- Service 2 -->
-                <div class="group">
+                <div class="group border-l-2 border-slate-100 pl-6 hover:border-rose-600 transition">
                     <span class="text-[8px] font-black uppercase text-slate-300 tracking-[.2em]">02 / Web</span>
                     <h2 class="text-lg font-bold mt-1 group-hover:text-rose-600 transition">Lightweight Web Portals</h2>
                     <p class="text-xs text-slate-500 mt-2 leading-relaxed">
@@ -99,7 +119,7 @@
                 </div>
 
                 <!-- Service 3 -->
-                <div class="group">
+                <div class="group border-l-2 border-slate-100 pl-6 hover:border-rose-600 transition">
                     <span class="text-[8px] font-black uppercase text-slate-300 tracking-[.2em]">03 / Marketing</span>
                     <h2 class="text-lg font-bold mt-1 group-hover:text-rose-600 transition">SEO & Content Strategy</h2>
                     <p class="text-xs text-slate-500 mt-2 leading-relaxed">
@@ -109,41 +129,41 @@
             </div>
         </main>
 
-        <!-- Far Right: Stack & Process (40%) -->
-        <aside class="w-2/5 bg-slate-50/50 p-6 lg:p-8 overflow-y-auto custom-scroll">
-            <h3 class="text-[9px] font-black uppercase text-slate-400 mb-4 tracking-widest">The Stack</h3>
+        <!-- Far Right: Stack & Process -->
+        <aside class="w-full lg:w-2/5 bg-slate-50/50 p-6 lg:p-12 lg:overflow-y-auto custom-scroll border-t lg:border-t-0 border-slate-100">
+            <h3 class="text-[9px] font-black uppercase text-slate-400 mb-6 tracking-widest">The Stack</h3>
             
-            <div class="grid grid-cols-2 gap-2 mb-10">
-                <div class="bg-white border border-slate-200 p-3 rounded flex flex-col items-center justify-center text-center">
+            <div class="grid grid-cols-2 gap-3 mb-12">
+                <div class="bg-white border border-slate-200 p-4 rounded flex flex-col items-center justify-center text-center shadow-sm">
                     <span class="text-[10px] font-black">LARAVEL</span>
                     <span class="text-[7px] text-slate-400 uppercase font-bold">Backend</span>
                 </div>
-                <div class="bg-white border border-slate-200 p-3 rounded flex flex-col items-center justify-center text-center">
+                <div class="bg-white border border-slate-200 p-4 rounded flex flex-col items-center justify-center text-center shadow-sm">
                     <span class="text-[10px] font-black">PYTHON</span>
                     <span class="text-[7px] text-slate-400 uppercase font-bold">Automation</span>
                 </div>
-                <div class="bg-white border border-slate-200 p-3 rounded flex flex-col items-center justify-center text-center">
+                <div class="bg-white border border-slate-200 p-4 rounded flex flex-col items-center justify-center text-center shadow-sm">
                     <span class="text-[10px] font-black">FIREBASE</span>
                     <span class="text-[7px] text-slate-400 uppercase font-bold">Real-time</span>
                 </div>
-                <div class="bg-white border border-slate-200 p-3 rounded flex flex-col items-center justify-center text-center">
+                <div class="bg-white border border-slate-200 p-4 rounded flex flex-col items-center justify-center text-center shadow-sm">
                     <span class="text-[10px] font-black">FRANKENPHP</span>
                     <span class="text-[7px] text-slate-400 uppercase font-bold">Runtime</span>
                 </div>
             </div>
 
-            <div class="mt-8 border-t border-slate-200 pt-8">
-                <h4 class="text-[9px] font-black uppercase text-slate-400 mb-4 tracking-widest">Our Methodology</h4>
-                <div class="space-y-4">
-                    <div class="flex gap-3">
+            <div class="mt-8 border-t border-slate-200 pt-8 mb-8 lg:mb-0">
+                <h4 class="text-[9px] font-black uppercase text-slate-400 mb-6 tracking-widest">Our Methodology</h4>
+                <div class="space-y-6">
+                    <div class="flex gap-4">
                         <span class="text-rose-600 font-bold text-xs">/</span>
                         <p class="text-[10px] font-semibold text-slate-600 leading-tight">Direct infrastructure management without Nginx overhead.</p>
                     </div>
-                    <div class="flex gap-3">
+                    <div class="flex gap-4">
                         <span class="text-rose-600 font-bold text-xs">/</span>
                         <p class="text-[10px] font-semibold text-slate-600 leading-tight">Local-first system monitoring for network tools.</p>
                     </div>
-                    <div class="flex gap-3">
+                    <div class="flex gap-4">
                         <span class="text-rose-600 font-bold text-xs">/</span>
                         <p class="text-[10px] font-semibold text-slate-600 leading-tight">SEO-optimized content tailored for conversion.</p>
                     </div>
@@ -153,7 +173,7 @@
     </div>
 
     <!-- Ticker -->
-    <div class="h-12 bg-black border-t border-rose-600 flex items-center overflow-hidden flex-shrink-0">
+    <div class="h-10 lg:h-12 bg-black border-t border-rose-600 flex items-center overflow-hidden flex-shrink-0">
         <div class="ticker-move">
             <div id="ticker-content" class="flex items-center">
                 <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
@@ -169,7 +189,7 @@
                     <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">News Portal Implementation</span>
                 </div>
             </div>
-            <!-- Duplicate for loop -->
+            <!-- Duplicate for seamless loop -->
             <div class="flex items-center">
                 <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
                     <span class="text-white text-[9px] font-black uppercase tracking-tighter whitespace-nowrap">Full-Stack Development</span>
@@ -188,7 +208,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="h-8 bg-white border-t border-slate-100 flex items-center justify-between px-6 flex-shrink-0">
+    <footer class="py-4 lg:h-8 bg-white border-t border-slate-100 flex flex-col lg:flex-row items-center justify-between px-6 flex-shrink-0 gap-2">
         <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">
             © <span id="current-year"></span> VOICES AT WORK — By THE CONTINENT VENTURES
         </p>

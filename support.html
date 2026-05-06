@@ -18,10 +18,17 @@
             font-family: 'Inter', sans-serif; 
             background-color: #ffffff; 
             color: var(--brand-dark);
-            overflow: hidden; 
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Desktop specific height lock - Released on Mobile */
+        @media (min-width: 1024px) {
+            body {
+                overflow: hidden; 
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
         }
         
         .heading-font { font-family: 'Unbounded', sans-serif; }
@@ -44,8 +51,8 @@
 <body class="antialiased">
 
     <!-- Navbar -->
-    <nav class="h-14 border-b border-slate-100 flex-shrink-0 px-6 flex justify-between items-center bg-white">
-        <div class="flex items-center gap-8">
+    <nav class="h-14 border-b border-slate-100 flex-shrink-0 px-4 md:px-6 flex justify-between items-center bg-white sticky top-0 z-50">
+        <div class="flex items-center gap-4 md:gap-8">
             <a href="index.html" class="heading-font font-black text-xs tracking-tighter uppercase italic">
                 VOICES <span class="text-rose-600">AT WORK</span>
             </a>
@@ -56,79 +63,91 @@
             </div>
         </div>
         <div class="flex items-center gap-4">
-            <div class="w-1.5 h-1.5 rounded-full bg-rose-600"></div>
-            <span class="text-[8px] font-black uppercase tracking-widest text-slate-400 italic">Online</span>
+            <div class="flex items-center gap-2">
+                <div class="w-1.5 h-1.5 rounded-full bg-rose-600"></div>
+                <span class="text-[8px] font-black uppercase tracking-widest text-slate-400 italic">Online</span>
+            </div>
+            <!-- Mobile Toggle -->
+            <button class="md:hidden text-slate-400" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
         </div>
     </nav>
 
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden bg-slate-900 p-6 space-y-4 border-b border-rose-600 text-center">
+        <a href="inspiration.html" class="block text-[10px] font-bold uppercase tracking-widest text-white">Inspiration</a>
+        <a href="services.html" class="block text-[10px] font-bold uppercase tracking-widest text-white">Our Services</a>
+        <a href="support.html" class="block text-[10px] font-bold uppercase tracking-widest text-rose-500">Support Our Work</a>
+    </div>
+
     <!-- Main Content Area -->
-    <div class="flex flex-1 overflow-hidden">
+    <div class="flex flex-col lg:flex-row flex-1 lg:overflow-hidden">
         
-        <!-- Far Left: M-Pesa Payment (60%) -->
-        <main class="w-3/5 p-6 lg:p-12 border-r border-slate-100 overflow-y-auto custom-scroll">
+        <!-- Far Left: M-Pesa Payment -->
+        <main class="w-full lg:w-3/5 p-6 lg:p-12 lg:border-r border-slate-100 lg:overflow-y-auto custom-scroll">
             <h3 class="text-[9px] font-black uppercase text-rose-600 mb-4 tracking-widest">Payment Portal</h3>
             
             <header class="mb-10">
-                <h1 class="text-3xl heading-font font-black leading-tight tracking-tighter mb-4">
+                <h1 class="text-2xl lg:text-4xl heading-font font-black leading-tight tracking-tighter mb-4">
                     FUEL THE <br> <span class="italic text-slate-300">ARCHITECTURE.</span>
                 </h1>
             </header>
 
             <!-- Focused M-Pesa Card -->
-            <div class="bg-slate-900 rounded-2xl p-10 text-white relative overflow-hidden">
+            <div class="bg-slate-900 rounded-2xl p-6 lg:p-10 text-white relative overflow-hidden shadow-2xl">
                 <div class="relative z-10">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" alt="M-Pesa" class="h-10 mb-10">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" alt="M-Pesa" class="h-8 lg:h-10 mb-8 lg:mb-10">
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 mb-8 lg:mb-10">
                         <div>
-                            <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 block mb-2">Paybill Number</span>
-                            <p class="text-4xl heading-font font-black tracking-tighter text-emerald-400">400200</p>
+                            <span class="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 block mb-1 lg:mb-2">Paybill Number</span>
+                            <p class="text-3xl lg:text-4xl heading-font font-black tracking-tighter text-emerald-400">400200</p>
                         </div>
                         <div>
-                            <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 block mb-2">Account No.</span>
-                            <p class="text-4xl heading-font font-black tracking-tighter text-white">57061</p>
+                            <span class="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 block mb-1 lg:mb-2">Account No.</span>
+                            <p class="text-3xl lg:text-4xl heading-font font-black tracking-tighter text-white">57061</p>
                         </div>
                     </div>
 
                     <!-- Updated Button -->
-                    <button class="w-full bg-emerald-500 hover:bg-emerald-600 transition-all duration-300 text-slate-900 font-black text-sm uppercase py-5 rounded-lg tracking-[0.3em]">
+                    <button class="w-full bg-emerald-500 hover:bg-emerald-600 transition-all duration-300 text-slate-900 font-black text-xs lg:text-sm uppercase py-4 lg:py-5 rounded-lg tracking-[0.3em]">
                         AMOUNT 10/=
                     </button>
                     
-                    <p class="text-center mt-6 text-[9px] font-bold text-slate-500 uppercase tracking-widest">
+                    <p class="text-center mt-6 text-[8px] lg:text-[9px] font-bold text-slate-500 uppercase tracking-widest">
                         Nairobi, Kenya — The Continent Ventures
                     </p>
                 </div>
 
-                <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                <div class="absolute -right-20 -bottom-20 w-48 h-48 lg:w-64 lg:h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
             </div>
         </main>
 
-        <!-- Far Right: Mission Context (40%) -->
-        <aside class="w-2/5 bg-slate-50/50 p-6 lg:p-12 overflow-y-auto custom-scroll">
+        <!-- Far Right: Mission Context -->
+        <aside class="w-full lg:w-2/5 bg-slate-50/50 p-6 lg:p-12 lg:overflow-y-auto custom-scroll border-t lg:border-t-0 border-slate-100">
             <h3 class="text-[9px] font-black uppercase text-slate-400 mb-6 tracking-widest">Why Support?</h3>
             
-            <div class="space-y-12">
-                <div>
+            <div class="space-y-10 lg:space-y-12">
+                <div class="border-l-2 border-slate-200 pl-4">
                     <h4 class="text-xs font-black uppercase mb-3 tracking-wider">Independent Infrastructure</h4>
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Your support keeps our local-first systems running, ensuring we provide high-performance monitoring and web solutions without dependency on restrictive cloud overhead.
                     </p>
                 </div>
 
-                <div>
+                <div class="border-l-2 border-slate-200 pl-4">
                     <h4 class="text-xs font-black uppercase mb-3 tracking-wider">The Continent Portal</h4>
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Contributions are directly channeled into maintaining the "The Continent" news portal—built for speed and lightweight mobile performance.
                     </p>
                 </div>
-
             </div>
         </aside>
     </div>
 
     <!-- Ticker -->
-    <div class="h-12 bg-black border-t border-rose-600 flex items-center overflow-hidden flex-shrink-0">
+    <div class="h-10 lg:h-12 bg-black border-t border-rose-600 flex items-center overflow-hidden flex-shrink-0">
         <div class="ticker-move">
             <div id="ticker-content" class="flex items-center">
                 <div class="flex items-center gap-3 px-6 border-r border-slate-800 h-12">
@@ -156,8 +175,8 @@
     </div>
 
     <!-- Footer -->
-    <footer class="h-8 bg-white border-t border-slate-100 flex items-center justify-between px-6 flex-shrink-0">
-        <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+    <footer class="py-4 lg:h-8 bg-white border-t border-slate-100 flex flex-col lg:flex-row items-center justify-between px-6 flex-shrink-0 gap-2">
+        <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest text-center">
             © <span id="current-year"></span> By THE CONTINENT VENTURES
         </p>
         <div class="flex gap-4 text-[8px] font-bold text-slate-400 uppercase tracking-widest italic">
