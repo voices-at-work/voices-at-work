@@ -83,16 +83,16 @@
 
                 <div id="post-content" class="article-body"></div>
 
-                <!-- NEW CUSTOM COMMENT SECTION -->
+                <!-- COMMENT SECTION -->
                 <section class="mt-16 pt-8 border-t border-slate-100">
                     <h3 class="heading-font text-[10px] font-black tracking-widest uppercase mb-6 text-slate-400 italic">Discussion / Comments</h3>
                     
                     <!-- Comment Input Form -->
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-10">
                         <div class="grid grid-cols-1 gap-3">
-                            <input id="cmt-name" type="text" placeholder="YOUR NAME" class="w-full p-3 text-[10px] font-bold border-none rounded bg-white focus:ring-1 focus:ring-rose-500 uppercase tracking-tighter">
+                            <input id="cmt-name" type="text" placeholder="YOUR NAME (OPTIONAL)" class="w-full p-3 text-[10px] font-bold border-none rounded bg-white focus:ring-1 focus:ring-rose-500 uppercase tracking-tighter">
                             <textarea id="cmt-text" placeholder="WRITE YOUR BRIEFING FEEDBACK..." class="w-full p-3 text-xs border-none rounded bg-white h-24 focus:ring-1 focus:ring-rose-500"></textarea>
-                            <button onclick="submitComment()" class="px-6 py-3 bg-rose-600 text-white text-[10px] font-black uppercase tracking-widest rounded hover:bg-rose-700 transition w-max">Submit Comment</button>
+                            <button onclick="submitComment()" class="px-6 py-3 bg-rose-600 text-white text-[10px] font-black uppercase tracking-widest rounded hover:bg-rose-700 transition w-max shadow-lg shadow-rose-200">Submit Comment</button>
                         </div>
                     </div>
 
@@ -165,15 +165,12 @@
                     document.getElementById('side-author').innerText = story.author;
                     document.getElementById('side-read-time').innerText = story.reading_time || '4 MIN';
                     
-                    // LOAD CUSTOM MYSQL COMMENTS
                     loadComments(slug);
-                    
                     populateExtras(stories, slug);
                 }
             } catch (e) { console.error(e); }
         }
 
-        // FETCH FROM MYSQL
         async function loadComments(slug) {
             try {
                 const response = await fetch(`comments.php?slug=${slug}`);
@@ -183,7 +180,7 @@
                 list.innerHTML = comments.map(c => `
                     <div class="border-l-2 border-rose-600 pl-4 py-1">
                         <div class="flex justify-between items-center mb-1">
-                            <span class="text-[9px] font-black uppercase tracking-widest text-slate-900">${c.user_name}</span>
+                            <span class="text-[9px] font-black uppercase tracking-widest text-slate-900">${c.user_name || 'Anonymous'}</span>
                             <span class="text-[7px] text-slate-400 uppercase font-bold">${c.created_at}</span>
                         </div>
                         <p class="text-[11px] leading-relaxed text-slate-600">${c.comment_text}</p>
@@ -192,15 +189,15 @@
             } catch (e) { console.error("Error loading comments:", e); }
         }
 
-        // SUBMIT TO MYSQL
         async function submitComment() {
             const params = new URLSearchParams(window.location.search);
             const slug = params.get('slug');
-            const name = document.getElementById('cmt-name').value;
+            const name = document.getElementById('cmt-name').value || 'Anonymous';
             const text = document.getElementById('cmt-text').value;
 
-            if (!name || !text) {
-                alert("Field validation failed: Name and Comment required.");
+            // NAME VALIDATION REMOVED - Only checking for content
+            if (!text) {
+                alert("Please enter a comment before submitting.");
                 return;
             }
 
@@ -213,8 +210,10 @@
 
                 const result = await response.json();
                 if (result.status === 'success') {
-                    alert("Submission received. Your briefing will be visible after analyst review.");
+                    // Logic: If is_approved defaults to 0, show review message. If 1, refresh list.
+                    alert("Submission received! Thank you for contributing to the briefing.");
                     document.getElementById('cmt-text').value = '';
+                    loadComments(slug); // Refresh the view
                 }
             } catch (e) { console.error("Submission error:", e); }
         }
