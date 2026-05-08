@@ -54,14 +54,13 @@
     </style>
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8DH3T7WG3X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-8DH3T7WG3X');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8DH3T7WG3X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8DH3T7WG3X');
+    </script>
 </head>
 <body class="antialiased">
 
@@ -202,7 +201,7 @@
             const script = document.createElement("script");
             script.src = "https://giscus.app/client.js";
             
-            // CONFIGURATION: Replace these values with your actual repo details
+            // CONFIGURATION
             script.setAttribute("data-repo", "DerrickOhato/voices-at-work"); 
             script.setAttribute("data-repo-id", "R_kgDN9W-vSg"); 
             script.setAttribute("data-category", "Announcements");
@@ -229,7 +228,7 @@
             const ticker = document.getElementById('ticker-content');
             const tickerClone = document.getElementById('ticker-content-clone');
 
-            sidebarTarget.innerHTML = ''; // Clear loading state
+            sidebarTarget.innerHTML = ''; 
 
             stories.filter(s => s.slug !== currentSlug).slice(0, 6).forEach(story => {
                 sidebarTarget.innerHTML += `
