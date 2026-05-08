@@ -108,6 +108,13 @@
                     </div>
                 </div>
 
+                <!-- Comment Section Container -->
+                <section class="mt-16 pt-8 border-t border-slate-100">
+                    <h3 class="heading-font text-[10px] font-black tracking-widest uppercase mb-8 text-slate-400 italic">Discussion / Comments</h3>
+                    <div id="disqus_thread"></div>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </section>
+
                 <footer class="mt-12 pt-6 border-t border-slate-100 mb-8 lg:mb-0">
                     <div class="bg-slate-900 p-6 rounded-xl text-white flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
                         <div>
@@ -182,9 +189,29 @@
                     document.getElementById('post-content').innerHTML = story.content;
                     document.getElementById('side-author').innerText = story.author;
                     document.getElementById('side-read-time').innerText = story.reading_time || '4 MIN';
+                    
+                    // Initialize Comments for this specific post
+                    loadDisqus(slug, story.title);
+                    
                     populateExtras(stories, slug);
                 }
             } catch (e) { console.error(e); }
+        }
+
+        function loadDisqus(slug, title) {
+            var disqus_config = function () {
+                this.page.url = window.location.href;  
+                this.page.identifier = slug; 
+                this.page.title = title;
+            };
+
+            (function() { 
+                var d = document, s = d.createElement('script');
+                // REPLACE 'voices-at-work' with your actual Disqus shortname
+                s.src = 'https://voices-at-work.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
         }
 
         function populateExtras(stories, currentSlug) {
