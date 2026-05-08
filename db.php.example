@@ -1,0 +1,9 @@
+<?php
+// Template for db.php - Rename this to db.php and fill in your local WAMP details
+$host = "localhost";
+$user = "root";
+$pass = "YOUR_PASSWORD_HERE";
+$dbname = "YOUR_DB_NAME";
+
+$conn = new mysqli($host, $user, $pass, $dbname);
+?>

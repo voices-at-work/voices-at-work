@@ -21,7 +21,6 @@
             min-height: 100vh;
         }
 
-        /* Desktop specific height lock - Released on Mobile */
         @media (min-width: 1024px) {
             body {
                 overflow: hidden; 
@@ -47,24 +46,14 @@
         .custom-scroll::-webkit-scrollbar-track { background: transparent; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; }
 
-        /* Compact Article Typography */
         .article-body p { margin-bottom: 1rem; line-height: 1.6; color: #334155; font-size: 0.95rem; }
         .article-body h2 { font-family: 'Unbounded', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--brand-dark); margin-top: 1.5rem; margin-bottom: 0.75rem; letter-spacing: -0.05em; }
         .article-body img { border-radius: 0.75rem; margin: 1.5rem 0; width: 100%; height: auto; }
     </style>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8DH3T7WG3X"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-8DH3T7WG3X');
-    </script>
 </head>
 <body class="antialiased">
 
-    <!-- Compact Navbar -->
+    <!-- Navbar -->
     <nav class="h-12 border-b border-slate-100 flex-shrink-0 px-4 flex justify-between items-center bg-white sticky top-0 z-50">
         <div class="flex items-center gap-4 md:gap-6">
             <a href="index.html" class="heading-font font-black text-[10px] tracking-tighter uppercase italic">
@@ -78,44 +67,43 @@
         </div>
         <div class="flex items-center gap-3">
             <div class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></div>
-            <span class="hidden xs:block text-[8px] font-black uppercase tracking-widest text-slate-400">File Access: Active</span>
+            <span class="hidden xs:block text-[8px] font-black uppercase tracking-widest text-slate-400">Local DB: Connected</span>
         </div>
     </nav>
 
-    <!-- Main Content Area -->
     <div class="flex flex-col lg:flex-row flex-1 lg:overflow-hidden">
-        
         <!-- Main Article Column -->
         <main class="w-full lg:w-3/5 p-5 lg:p-8 lg:border-r border-slate-100 lg:overflow-y-auto custom-scroll bg-white">
             <article class="max-w-xl mx-auto">
                 <header class="mb-6">
-                    <div id="post-meta" class="text-[8px] font-black uppercase text-rose-600 mb-2 tracking-[0.2em]">
-                        <!-- Injected via JS -->
-                    </div>
-                    <h1 id="post-title" class="text-xl md:text-2xl lg:text-3xl heading-font font-black leading-tight tracking-tighter mb-4">
-                        <!-- Injected via JS -->
-                    </h1>
-                    <div id="post-featured-image" class="aspect-[21/9] rounded-xl overflow-hidden bg-slate-100 mb-6 shadow-sm">
-                        <!-- Injected via JS -->
-                    </div>
+                    <div id="post-meta" class="text-[8px] font-black uppercase text-rose-600 mb-2 tracking-[0.2em]"></div>
+                    <h1 id="post-title" class="text-xl md:text-2xl lg:text-3xl heading-font font-black leading-tight tracking-tighter mb-4"></h1>
+                    <div id="post-featured-image" class="aspect-[21/9] rounded-xl overflow-hidden bg-slate-100 mb-6 shadow-sm"></div>
                 </header>
 
-                <div id="post-content" class="article-body">
-                    <!-- Loading State -->
-                    <div class="py-10 text-center">
-                        <div class="inline-block animate-spin rounded-full h-4 w-4 border-t-2 border-rose-600"></div>
-                    </div>
-                </div>
+                <div id="post-content" class="article-body"></div>
 
-                <!-- Comment Section Container -->
+                <!-- NEW CUSTOM COMMENT SECTION -->
                 <section class="mt-16 pt-8 border-t border-slate-100">
-                    <h3 class="heading-font text-[10px] font-black tracking-widest uppercase mb-8 text-slate-400 italic">Discussion / Comments</h3>
-                    <!-- Giscus Container -->
-                    <div class="giscus"></div>
+                    <h3 class="heading-font text-[10px] font-black tracking-widest uppercase mb-6 text-slate-400 italic">Discussion / Comments</h3>
+                    
+                    <!-- Comment Input Form -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-10">
+                        <div class="grid grid-cols-1 gap-3">
+                            <input id="cmt-name" type="text" placeholder="YOUR NAME" class="w-full p-3 text-[10px] font-bold border-none rounded bg-white focus:ring-1 focus:ring-rose-500 uppercase tracking-tighter">
+                            <textarea id="cmt-text" placeholder="WRITE YOUR BRIEFING FEEDBACK..." class="w-full p-3 text-xs border-none rounded bg-white h-24 focus:ring-1 focus:ring-rose-500"></textarea>
+                            <button onclick="submitComment()" class="px-6 py-3 bg-rose-600 text-white text-[10px] font-black uppercase tracking-widest rounded hover:bg-rose-700 transition w-max">Submit Comment</button>
+                        </div>
+                    </div>
+
+                    <!-- Comments List -->
+                    <div id="comments-list" class="space-y-6">
+                        <!-- Loaded via JS from MySQL -->
+                    </div>
                 </section>
 
                 <footer class="mt-12 pt-6 border-t border-slate-100 mb-8 lg:mb-0">
-                    <div class="bg-slate-900 p-6 rounded-xl text-white flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+                    <div class="bg-slate-900 p-6 rounded-xl text-white flex flex-col sm:flex-row justify-between items-center gap-4">
                         <div>
                             <h3 class="heading-font text-xs font-black tracking-tighter uppercase">VOICES INTELLIGENCE</h3>
                             <p class="text-[9px] text-slate-400 font-medium">Curated professional briefing.</p>
@@ -128,8 +116,6 @@
 
         <!-- Sidebar -->
         <aside class="w-full lg:w-2/5 bg-slate-50/30 flex flex-col lg:overflow-hidden border-t lg:border-t-0 border-slate-100">
-            
-            <!-- Metadata Section -->
             <div class="p-5 border-b border-slate-200">
                 <h3 class="text-[9px] font-black uppercase text-slate-400 mb-3 tracking-widest italic">Metadata</h3>
                 <div class="grid grid-cols-2 lg:block lg:space-y-2 gap-4">
@@ -144,19 +130,9 @@
                 </div>
             </div>
 
-            <!-- Related Section -->
             <div class="flex-1 p-5 lg:overflow-y-auto custom-scroll">
                 <h3 class="text-[9px] font-black uppercase text-slate-400 mb-4 tracking-widest italic">Related Briefings</h3>
-                <div id="sidebar-target" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 lg:space-y-4">
-                    <!-- Data via JS -->
-                </div>
-            </div>
-
-            <!-- Ad Placement -->
-            <div class="p-4 border-t border-slate-200 bg-white sticky bottom-0 lg:relative">
-                <div class="h-[60px] lg:h-[90px] w-full flex flex-col items-center justify-center border border-dashed border-slate-200 rounded">
-                    <span class="text-[7px] font-black text-slate-300 uppercase tracking-widest">Advertisement Space</span>
-                </div>
+                <div id="sidebar-target" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 lg:space-y-4"></div>
             </div>
         </aside>
     </div>
@@ -189,45 +165,64 @@
                     document.getElementById('side-author').innerText = story.author;
                     document.getElementById('side-read-time').innerText = story.reading_time || '4 MIN';
                     
-                    // Initialize Giscus for this specific post
-                    loadGiscus(slug);
+                    // LOAD CUSTOM MYSQL COMMENTS
+                    loadComments(slug);
                     
                     populateExtras(stories, slug);
                 }
             } catch (e) { console.error(e); }
         }
 
-        function loadGiscus(slug) {
-            const script = document.createElement("script");
-            script.src = "https://giscus.app/client.js";
-            
-            // CONFIGURATION - Using the latest Repo ID provided
-            script.setAttribute("data-repo", "voices-at-work/voices-at-work"); 
-            script.setAttribute("data-repo-id", "R_kgDOSUmNLA"); 
-            script.setAttribute("data-category", "Announcements");
-            script.setAttribute("data-category-id", "DIC_kwDOSUmNLM4Ck_T4");
-            
-            script.setAttribute("data-mapping", "specific");
-            script.setAttribute("data-term", slug);
-            script.setAttribute("data-strict", "0");
-            script.setAttribute("data-reactions-enabled", "1");
-            script.setAttribute("data-emit-metadata", "0");
-            script.setAttribute("data-input-position", "top");
-            script.setAttribute("data-theme", "light");
-            script.setAttribute("data-lang", "en");
-            script.crossOrigin = "anonymous";
-            script.async = true;
-            
-            const container = document.querySelector(".giscus");
-            container.innerHTML = ''; // Clear previous if any
-            container.appendChild(script);
+        // FETCH FROM MYSQL
+        async function loadComments(slug) {
+            try {
+                const response = await fetch(`comments.php?slug=${slug}`);
+                const comments = await response.json();
+                const list = document.getElementById('comments-list');
+                
+                list.innerHTML = comments.map(c => `
+                    <div class="border-l-2 border-rose-600 pl-4 py-1">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[9px] font-black uppercase tracking-widest text-slate-900">${c.user_name}</span>
+                            <span class="text-[7px] text-slate-400 uppercase font-bold">${c.created_at}</span>
+                        </div>
+                        <p class="text-[11px] leading-relaxed text-slate-600">${c.comment_text}</p>
+                    </div>
+                `).join('') || '<p class="text-[8px] uppercase text-slate-400 tracking-widest">No conversation yet. Start the briefing discussion.</p>';
+            } catch (e) { console.error("Error loading comments:", e); }
+        }
+
+        // SUBMIT TO MYSQL
+        async function submitComment() {
+            const params = new URLSearchParams(window.location.search);
+            const slug = params.get('slug');
+            const name = document.getElementById('cmt-name').value;
+            const text = document.getElementById('cmt-text').value;
+
+            if (!name || !text) {
+                alert("Field validation failed: Name and Comment required.");
+                return;
+            }
+
+            try {
+                const response = await fetch('comments.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ slug, name, text })
+                });
+
+                const result = await response.json();
+                if (result.status === 'success') {
+                    alert("Submission received. Your briefing will be visible after analyst review.");
+                    document.getElementById('cmt-text').value = '';
+                }
+            } catch (e) { console.error("Submission error:", e); }
         }
 
         function populateExtras(stories, currentSlug) {
             const sidebarTarget = document.getElementById('sidebar-target');
             const ticker = document.getElementById('ticker-content');
             const tickerClone = document.getElementById('ticker-content-clone');
-
             sidebarTarget.innerHTML = ''; 
 
             stories.filter(s => s.slug !== currentSlug).slice(0, 6).forEach(story => {
@@ -246,6 +241,7 @@
                 ticker.innerHTML += tickerItem; tickerClone.innerHTML += tickerItem;
             });
         }
+
         window.onload = displayPost;
     </script>
 </body>

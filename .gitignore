@@ -1,1 +1,15 @@
 admin.php
+
+# Database configuration
+db.php
+
+# If you want to hide the logic entirely (though usually only db.php is hidden)
+comments.php
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
