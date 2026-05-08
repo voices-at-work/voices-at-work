@@ -111,8 +111,8 @@
                 <!-- Comment Section Container -->
                 <section class="mt-16 pt-8 border-t border-slate-100">
                     <h3 class="heading-font text-[10px] font-black tracking-widest uppercase mb-8 text-slate-400 italic">Discussion / Comments</h3>
-                    <div id="disqus_thread"></div>
-                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <!-- Giscus Container -->
+                    <div class="giscus"></div>
                 </section>
 
                 <footer class="mt-12 pt-6 border-t border-slate-100 mb-8 lg:mb-0">
@@ -190,28 +190,38 @@
                     document.getElementById('side-author').innerText = story.author;
                     document.getElementById('side-read-time').innerText = story.reading_time || '4 MIN';
                     
-                    // Initialize Comments for this specific post
-                    loadDisqus(slug, story.title);
+                    // Initialize Giscus for this specific post
+                    loadGiscus(slug);
                     
                     populateExtras(stories, slug);
                 }
             } catch (e) { console.error(e); }
         }
 
-        function loadDisqus(slug, title) {
-            var disqus_config = function () {
-                this.page.url = window.location.href;  
-                this.page.identifier = slug; 
-                this.page.title = title;
-            };
-
-            (function() { 
-                var d = document, s = d.createElement('script');
-                // REPLACE 'voices-at-work' with your actual Disqus shortname
-                s.src = 'https://voices-at-work.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
+        function loadGiscus(slug) {
+            const script = document.createElement("script");
+            script.src = "https://giscus.app/client.js";
+            
+            // CONFIGURATION: Replace these values with your actual repo details
+            script.setAttribute("data-repo", "DerrickOhato/voices-at-work"); 
+            script.setAttribute("data-repo-id", "R_kgDN9W-vSg"); 
+            script.setAttribute("data-category", "Announcements");
+            script.setAttribute("data-category-id", "DIC_kwDN9W-vSs4Ck8-M");
+            
+            script.setAttribute("data-mapping", "specific");
+            script.setAttribute("data-term", slug);
+            script.setAttribute("data-strict", "0");
+            script.setAttribute("data-reactions-enabled", "1");
+            script.setAttribute("data-emit-metadata", "0");
+            script.setAttribute("data-input-position", "top");
+            script.setAttribute("data-theme", "light");
+            script.setAttribute("data-lang", "en");
+            script.crossOrigin = "anonymous";
+            script.async = true;
+            
+            const container = document.querySelector(".giscus");
+            container.innerHTML = ''; // Clear previous if any
+            container.appendChild(script);
         }
 
         function populateExtras(stories, currentSlug) {
